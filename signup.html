@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVYM Tech4Hope - Sign Up</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SVYM Tech4Hope</h1>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="candidateName">Candidate's Name:</label>
+                <input type="text" id="candidateName" name="candidateName" required>
+            </div>
+            <div class="form-group">
+                <label for="fatherHusbandName">Father/Husband Name:</label>
+                <input type="text" id="fatherHusbandName" name="fatherHusbandName" required>
+            </div>
+            <div class="form-group">
+                <label for="villageName">Village Name:</label>
+                <input type="text" id="villageName" name="villageName" required>
+            </div>
+            <div class="form-group">
+                <label for="talukName">Taluk Name:</label>
+                <input type="text" id="talukName" name="talukName" required>
+            </div>
+            <div class="form-group">
+                <label for="districtName">District Name:</label>
+                <input type="text" id="districtName" name="districtName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="familyMembers">No. of Family Members:</label>
+                <input type="number" id="familyMembers" name="familyMembers" required>
+            </div>
+            <div class="form-group">
+                <label for="qualification">Qualification:</label>
+                <input type="text" id="qualification" name="qualification" required>
+            </div>
+            <div class="form-group">
+                <label for="caste">Caste:</label>
+                <input type="text" id="caste" name="caste" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tribal">Tribal/Non-Tribal:</label>
+                <select id="tribal" name="tribal" required>
+                    <option value="">Select</option>
+                    <option value="tribal">Tribal</option>
+                    <option value="non-tribal">Non-Tribal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pwd">PWD (Person with Disability):</label>
+                <select id="pwd" name="pwd" required>
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="singleParentWidow">Single Parent/Widow:</label>
+                <select id="singleParentWidow" name="singleParentWidow" required>
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="aadharNumber">Aadhar Number:</label>
+                <input type="text" id="aadharNumber" name="aadharNumber" pattern="[0-9]{12}" title="Aadhar number must be 12 digits" required>
+            </div>
+            <div class="form-group">
+                <label for="candidatePhone">Candidate's Phone no:</label>
+                <input type="tel" id="candidatePhone" name="candidatePhone" pattern="[0-9]{10}" title="Phone number must be 10 digits" required>
+            </div>
+            <div class="form-group">
+                <label for="parentPhone">Parents Phone no:</label>
+                <input type="tel" id="parentPhone" name="parentPhone" pattern="[0-9]{10}" title="Phone number must be 10 digits" required>
+            </div>
+            <div class="form-group">
+                <label for="mobiliserName">Mobiliser Name:</label>
+                <input type="text" id="mobiliserName" name="mobiliserName" required>
+            </div>
+            <div class="form-group">
+                <label for="supportedProject">Supported Project:</label>
+                <input type="text" id="supportedProject" name="supportedProject" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID (for Login):</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="securityQuestion1">Security Question 1:</label>
+                <select id="securityQuestion1" name="securityQuestion1" required>
+                    <option value="">Select a question</option>
+                    <option value="petName">What was the name of your first pet?</option>
+                    <option value="motherMaidenName">What is your mother's maiden name?</option>
+                    <option value="firstCar">What was the make and model of your first car?</option>
+                </select>
+                <input type="text" id="securityAnswer1" name="securityAnswer1" placeholder="Your answer" required>
+            </div>
+            <div class="form-group">
+                <label for="securityQuestion2">Security Question 2:</label>
+                <select id="securityQuestion2" name="securityQuestion2" required>
+                    <option value="">Select a question</option>
+                    <option value="favoriteBook">What is your favorite book?</option>
+                    <option value="childhoodHero">Who was your childhood hero?</option>
+                    <option value="firstJobCity">In what city did you have your first job?</option>
+                </select>
+                <input type="text" id="securityAnswer2" name="securityAnswer2" placeholder="Your answer" required>
+            </div>
+
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </form>
+    </div>
+    <script src="/Javascripts/signup.js"></script>
+</body>
+</html>
