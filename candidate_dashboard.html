@@ -6,16 +6,19 @@
     <title>SVYM Tech4Hope - Student Dashboard</title>
     <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* General Body and Main Layout - (Existing styles from your provided HTML) */
+        /* General Body and Main Layout */
         body {
             display: flex;
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            min-height: 100vh;
+            /* Changed: Make body responsible for overall layout, not primary scroll */
+            height: 100vh; /* Use height instead of min-height to constrain to viewport */
             background: linear-gradient(135deg, #e0f2f7, #c1e7f0);
             color: #333;
-            overflow-x: hidden;
+            overflow: hidden; /* Prevent body scroll by default, content handles its own scroll */
         }
+
+        /* Main Content Area */
         .container.main-content {
             flex-grow: 1;
             background-color: #ffffff;
@@ -26,27 +29,40 @@
             transition: margin-left 0.3s ease;
             position: relative;
             z-index: 1;
+            /* Important: Make main content scrollable if its content overflows */
+            overflow-y: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;    /* Firefox */
+            height: calc(100vh - 40px); /* Fill remaining height, account for 20px top/bottom margin */
         }
+        .container.main-content::-webkit-scrollbar { display: none; } /* Hide scrollbar for main content */
+
+
+        /* Side Menu (Sidebar) */
         .side-menu {
             width: 280px;
             background: linear-gradient(180deg, #1E90FF, #007BFF);
             color: white;
             padding-top: 30px;
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
-            position: sticky;
+            position: sticky; /* Keep it sticky */
             top: 0;
             left: 0;
-            height: 100vh;
+            height: 100vh; /* Make sidebar fill viewport height */
             display: flex;
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
             transition: transform 0.3s ease;
-            overflow-y: auto;
+            /* This is already correct for sidebar scrolling */
+            overflow-y: auto; /* Enable vertical scrolling for the sidebar itself */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* Hide scrollbar for Chrome, Safari and Opera */
         .side-menu::-webkit-scrollbar { display: none; }
+
+
         .side-menu .logo {
             font-size: 2.2em;
             font-weight: 700;
@@ -56,20 +72,25 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
             flex-shrink: 0;
         }
+
         .side-menu nav {
             flex-grow: 1;
             width: 100%;
-            overflow-y: auto;
+            /* This is already correct for nav scrolling within sidebar */
+            overflow-y: auto; /* Enable scrolling specifically for the navigation list */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* Hide scrollbar for Chrome, Safari and Opera for nav */
         .side-menu nav::-webkit-scrollbar { display: none; }
+
         .side-menu nav ul {
             list-style: none;
             padding: 0;
             width: 90%;
             margin: 0 auto;
         }
+
         .side-menu nav ul li { margin-bottom: 8px; }
         .side-menu nav ul li a {
             display: flex;
@@ -81,10 +102,12 @@
             border-radius: 8px;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
         }
+
         .side-menu nav ul li a .fas {
             margin-right: 15px;
             font-size: 1.3em;
         }
+
         .side-menu nav ul li a:hover,
         .side-menu nav ul li a.active {
             background-color: rgba(255, 255, 255, 0.2);
@@ -92,6 +115,7 @@
             transform: translateX(5px);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
+
         .welcome-message {
             text-align: center;
             margin-bottom: 40px;
@@ -99,6 +123,7 @@
             font-size: 1.8em;
             font-weight: 600;
         }
+
         .main-content h3 {
             color: #007bff;
             margin-top: 25px;
@@ -107,22 +132,24 @@
             border-bottom: 2px solid #e0f2f7;
             padding-bottom: 10px;
         }
+
         .main-content p {
             line-height: 1.8;
             font-size: 1.05em;
         }
-        .logout-link { /* Now part of the main nav ul */
+
+        .logout-link {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center text and icon */
-            margin-top: 20px; /* Space from last nav item */
+            justify-content: center;
+            margin-top: 20px;
             padding: 15px 20px;
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
             border-top: 1px solid rgba(255,255,255,0.1);
-            width: 100%; /* Take full width of parent nav ul */
+            width: 100%;
             flex-shrink: 0;
         }
         .logout-link:hover {
@@ -134,6 +161,8 @@
             margin-right: 10px;
             font-size: 1.2em;
         }
+
+        /* Hamburger menu for mobile */
         .hamburger {
             display: none;
             font-size: 1.3em;
@@ -150,6 +179,8 @@
             transition: all 0.3s ease;
         }
         .hamburger:hover { transform: scale(1.1); }
+
+        /* Overlay for mobile when menu is open */
         .overlay {
             display: none;
             position: fixed;
@@ -161,6 +192,8 @@
             z-index: 998;
         }
         .overlay.active { display: block; }
+
+        /* Video Section Styling */
         .video-section { margin-top: 40px; }
         .video-grid {
             display: grid;
@@ -194,46 +227,46 @@
         /* --- UI Enhancements for Dashboard Cards --- */
         .dashboard-card-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted min-width for cards */
-            gap: 25px; /* Increased gap between cards */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             margin-top: 30px;
         }
 
         .dashboard-card {
-            background-color: #ffffff; /* White background */
-            border-radius: 15px; /* More rounded corners */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); /* Enhanced shadow for depth */
-            padding: 25px; /* More padding inside */
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            padding: 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 220px; /* Increased min-height for better balance */
+            min-height: 220px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden; /* Ensures content doesn't spill */
+            overflow: hidden;
             position: relative;
         }
 
         .dashboard-card:hover {
-            transform: translateY(-8px); /* More pronounced lift on hover */
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18); /* Stronger shadow on hover */
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
         }
 
         .dashboard-card h4 {
-            color: #0056b3; /* Darker blue for headings */
+            color: #0056b3;
             margin-top: 0;
-            margin-bottom: 20px; /* More space below heading */
-            font-size: 1.5em; /* Larger heading */
+            margin-bottom: 20px;
+            font-size: 1.5em;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #e9f5ff; /* Subtle bottom border for heading */
+            border-bottom: 2px solid #e9f5ff;
             padding-bottom: 10px;
             font-weight: 600;
         }
 
         .dashboard-card h4 .fas {
-            margin-right: 12px; /* More space for icon */
-            font-size: 1.3em; /* Larger icon */
-            color: #1E90FF; /* Dodgerblue for icons */
+            margin-right: 12px;
+            font-size: 1.3em;
+            color: #1E90FF;
         }
 
         .dashboard-card ul {
@@ -241,8 +274,8 @@
             padding: 0;
             margin: 0;
             flex-grow: 1;
-            overflow-y: auto; /* Allow scrolling if list gets too long */
-            max-height: 250px; /* Limit height of list */
+            overflow-y: auto;
+            max-height: 250px;
             scrollbar-width: thin;
             scrollbar-color: #a8d5ff #f0f8ff;
         }
@@ -253,18 +286,18 @@
 
 
         .dashboard-card .card-link {
-            display: block; /* Make it a block-level link */
-            width: fit-content; /* Fit width to content */
-            margin-top: 25px; /* More space above link */
+            display: block;
+            width: fit-content;
+            margin-top: 25px;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
             text-decoration: none;
-            border-radius: 8px; /* More rounded button */
+            border-radius: 8px;
             font-size: 0.95em;
             font-weight: 500;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            align-self: flex-start; /* Align link to the left */
+            align-self: flex-start;
         }
 
         .dashboard-card .card-link:hover {
@@ -274,12 +307,12 @@
 
         /* --- Specific Styles for Placements List --- */
         .placement-item {
-            display: block; /* Ensures each detail is on a new line or block */
-            background-color: #f8faff; /* Light background for each item */
+            display: block;
+            background-color: #f8faff;
             border: 1px solid #e0f2ff;
             border-radius: 8px;
             padding: 12px 15px;
-            margin-bottom: 12px; /* Space between items */
+            margin-bottom: 12px;
             font-size: 0.9em;
             line-height: 1.5;
             color: #555;
@@ -287,35 +320,35 @@
         }
         .placement-item:hover {
             background-color: #eaf3f8;
-            transform: translateX(3px); /* Subtle slide on hover */
+            transform: translateX(3px);
         }
         .placement-item strong {
             color: #333;
-            display: block; /* Make the bold title a block for spacing */
+            display: block;
             margin-bottom: 4px;
             font-size: 1.05em;
         }
         .placement-item span {
-            display: block; /* Each detail on its own line */
+            display: block;
             margin-bottom: 2px;
         }
         .placement-item span.date {
             font-weight: 500;
-            color: #007bff; /* Highlight date */
+            color: #007bff;
         }
         .placement-item i.fas {
             margin-right: 8px;
-            color: #1E90FF; /* Icon color */
+            color: #1E90FF;
         }
 
         /* --- Specific Styles for Monthly Activity List --- */
         .activity-month-header {
             font-weight: bold;
             color: #0056b3;
-            margin-top: 20px; /* Space above month header */
+            margin-top: 20px;
             margin-bottom: 10px;
             font-size: 1.1em;
-            border-bottom: 2px dashed #d0e8f7; /* Clear separator */
+            border-bottom: 2px dashed #d0e8f7;
             padding-bottom: 8px;
             width: 100%;
             display: flex;
@@ -327,12 +360,12 @@
             font-size: 1.1em;
         }
 
-        .activity-item-card { /* Each activity treated as a small card */
+        .activity-item-card {
             background-color: #f8faff;
             border: 1px solid #e0f2ff;
             border-radius: 8px;
             padding: 10px 15px;
-            margin-left: 15px; /* Indent activity items under month */
+            margin-left: 15px;
             margin-bottom: 8px;
             font-size: 0.88em;
             line-height: 1.4;
@@ -345,7 +378,7 @@
         }
         .activity-item-card strong {
             color: #333;
-            font-size: 1em; /* Keep bold text readable */
+            font-size: 1em;
         }
         .activity-item-card span {
             display: block;
@@ -358,7 +391,7 @@
             font-size: 0.95em;
         }
 
-        /* Existing responsive adjustments (from your provided HTML) */
+        /* Existing responsive adjustments */
         @media (max-width: 768px) {
             .side-menu {
                 position: fixed;
@@ -373,11 +406,12 @@
             .container.main-content {
                 margin: 20px;
                 margin-top: 90px;
+                height: calc(100vh - 110px); /* Adjust height for mobile due to hamburger and margin */
             }
             .video-grid { grid-template-columns: 1fr; }
             .dashboard-card-section { grid-template-columns: 1fr; }
-            .dashboard-card { min-height: auto; } /* Allow height to adjust on mobile */
-            .dashboard-card ul { max-height: 200px; } /* Smaller max-height for mobile scroll */
+            .dashboard-card { min-height: auto; }
+            .dashboard-card ul { max-height: 200px; }
             .mission-list {
                 list-style: disc;
                 margin-left: 25px;
@@ -477,6 +511,7 @@
                 <ul>
                     <li><i class="fas fa-comments"></i> <a href="student_forum.html" class="plain-link">Student Forum</a></li>
                     <li><i class="fas fa-lightbulb"></i> <a href="submit_feedback.html" class="plain-link">Submit Feedback</a></li>
+                </ul>
             </div>
         </div>
     </div>
