@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: '2025-06-02', courseName: 'Fashion Designing', status: 'Absent', remarks: 'Sick leave' },
         { date: '2025-06-03', courseName: 'Fashion Designing', status: 'Present', remarks: '' },
         { date: '2025-06-04', courseName: 'Fashion Designing', status: 'Present', remarks: '' },
-        { date: '2025-06-05', courseName: 'Fashion Designing', status: 'Late', remarks: 'Sick leave' },
+        { date: '2025-06-05', courseName: 'Fashion Designing', status: 'Absent', remarks: 'Sick leave' },
         { date: '2025-06-01', courseName: 'Mobile Repair and Service', status: 'Present', remarks: '' },
         { date: '2025-06-02', courseName: 'Mobile Repair and Service', status: 'Present', remarks: '' },
         { date: '2025-06-03', courseName: 'Mobile Repair and Service', status: 'Absent', remarks: 'Sick leave' },
