@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (newPassword.length < 6) {
+       /* if (newPassword.length < 6) {
             alert('Password must be at least 6 characters long.');
             return;
-        }
+        }*/
 
         // Dummy client-side password update for demonstration:
         if (dummyUsers[recoveryEmail]) {
